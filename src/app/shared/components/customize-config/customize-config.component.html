@@ -23,16 +23,16 @@
             </div>
             <a href="javascript:void(0)" class="switch-trigger background-color">
                 <div class="badge-colors my-2 text-start">
-                    <span class="badge filter bg-gradient-primary active" data-color="primary"
-                        onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-success" data-color="success"
-                        onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-warning" data-color="warning"
-                        onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-danger" data-color="danger"
-                        onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-primary active" data-color="primary" (click)="sharedService.colorSwitch.next('bg-gradient-primary')"
+                    ></span>
+                    <span class="badge filter bg-gradient-dark" data-color="dark" (click)="sharedService.colorSwitch.next('bg-gradient-dark')"></span>
+                    <span class="badge filter bg-gradient-info" data-color="info" (click)="sharedService.colorSwitch.next('bg-gradient-info')"></span>
+                    <span class="badge filter bg-gradient-success" data-color="success"(click)="sharedService.colorSwitch.next('bg-gradient-success')"
+                    ></span>
+                    <span class="badge filter bg-gradient-warning" data-color="warning"(click)="sharedService.colorSwitch.next('bg-gradient-warning')"
+                    ></span>
+                    <span class="badge filter bg-gradient-danger" data-color="danger"(click)="sharedService.colorSwitch.next('bg-gradient-danger')"
+                    ></span>
                 </div>
             </a>
             <!-- Sidenav Type -->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/shared.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  tmp:boolean=false
+  color:number=1
+  colorSwitch!: string;
+  constructor(public sharedService:SharedService) { }
 
   ngOnInit(): void {
+    this.sharedService.colorSwitch.subscribe(color => this.colorSwitch = color);
   }
+  switch (selected:number) {
+    this.color=selected
+  }
+  
+
 
 }

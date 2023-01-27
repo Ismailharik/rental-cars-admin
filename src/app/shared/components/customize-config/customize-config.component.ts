@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/shared.service';
 
 @Component({
   selector: 'app-customize-config',
@@ -8,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class CustomizeConfigComponent implements OnInit {
 
   show:boolean=false;
-  constructor() { }
+
+  constructor(public sharedService:SharedService) { }
 
   ngOnInit(): void {
   
