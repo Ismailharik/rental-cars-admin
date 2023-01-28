@@ -28,13 +28,27 @@
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="material-icons opacity-10">table_view</i>
           </div>
-          <span class="nav-link-text ms-1">Tables</span>
+          <span class="nav-link-text ms-1">Customers</span>
         </a>
         <a class="nav-link text-white "*ngIf="color!=2"  (click)="switch(2)" [routerLink]="'/customers'">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="material-icons opacity-10">table_view</i>
           </div>
           <span class="nav-link-text ms-1">Tables</span>
+        </a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link text-white "*ngIf="color==3"  (click)="switch(3)" [ngClass]="'active' + ' ' + colorSwitch" [routerLink]="'/vehicles'">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">table_view</i>
+          </div>
+          <span class="nav-link-text ms-1">Vehicles</span>
+        </a>
+        <a class="nav-link text-white "*ngIf="color!=3"  (click)="switch(3)" [routerLink]="'/vehicles'">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">table_view</i>
+          </div>
+          <span class="nav-link-text ms-1">Vehicles</span>
         </a>
       </li>
       <li class="nav-item">

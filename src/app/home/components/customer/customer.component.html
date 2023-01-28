@@ -13,6 +13,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Full Name
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -43,7 +44,6 @@
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0"><a href="tel:06">{{customer.phone}}</a>
                                         </p>
-                                        <p class="text-xs text-secondary mb-0">Organization</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm "
@@ -57,13 +57,13 @@
                                             class="text-secondary text-xs font-weight-bold">{{customer.birthdate|date}}</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a  (click)="open(content,customer)"
+                                        <a  (click)="open(customerModal,customer)"
                                             class="text-secondary font-weight-bold text-ls"  data-toggle="tooltip">
-                                            Edit |
+                                            Edit &nbsp;&nbsp;&nbsp;&nbsp; |
                                         </a>
                                         <a  class="text-danger font-weight-bold text-ls" data-toggle="tooltip"
                                             (click)="deleteCustomer(customer.id)">
-                                            Delete
+                                            &nbsp;&nbsp;&nbsp;&nbsp;Delete
                                         </a>
                                     </td>
                                 </tr>
@@ -78,12 +78,11 @@
 </div>
 
 
-<ng-template #content let-c="close" let-d="dismiss">
+<ng-template #customerModal let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title" > <span>Update Customer</span></h4>
     </div>
     <div class="modal-header">
-
         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
     </div>
     <div class="model-body">
@@ -123,5 +122,3 @@
         <button type="button" class="btn btn-outline-dark" (click)="c('Save click');saveUpdate()">Save</button>
     </div>
 </ng-template>
-
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
