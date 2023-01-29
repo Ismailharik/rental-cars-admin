@@ -75,7 +75,7 @@
                                         <span class="badge badge-sm "
                                             [ngClass]="vehicle.available==true?'bg-gradient-success':'bg-gradient-primary'">
                                             <span *ngIf="vehicle.available">Available</span>
-                                            <span *ngIf="!  vehicle.available">unavailable</span>
+                                            <span *ngIf="!vehicle.available">unavailable</span>
                                         </span>
                                     </td>
                                     <td class="align-middle text-center">
@@ -91,7 +91,10 @@
                                             (click)="deleteCustomer(vehicle.id)">
                                             &nbsp;&nbsp;&nbsp;&nbsp;Delete
                                         </a>
-                                        
+                                        <a class=" font-weight-bold text-ls"style="color:green"  data-toggle="tooltip"
+                                        [routerLink]="'/vehicles/'+vehicle.id">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: large;">+</span>
+                                        </a>
                                     </td>
                                 </tr>
 

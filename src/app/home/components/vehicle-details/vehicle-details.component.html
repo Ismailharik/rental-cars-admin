@@ -1,0 +1,124 @@
+<!-- Detail Start -->
+<div class="container-fluid pt-5">
+    <div class="container ">
+        <div class="row" *ngIf="vehicle">
+            <div class="col-lg-8 mb-5 mx-auto">
+                <h1 class="display-4 text-uppercase mb-5 text-primary">{{vehicle.title}}</h1>
+                <div class="row mx-n2 mb-3">
+                    <div class="col-md-3 col-6 px-2 pb-2 " *ngFor="let url of vehicle.urls;let i=index">
+                        <img class="img-fluid w-100 mb-2" [src]="url+'?ts='+currentTime" alt="" style="height: 170px">
+                        <div class="d-flex justify-content-center">
+                            <span>
+                                <a>
+                                    <i class="fas fa-pencil-alt text-primary mx-1"
+                                        (click)="openUpdateImage(updateImageModal, i)"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a (click)="deleteImage(i)">
+                                    <i class="fas fa-trash-alt text-primary mx-1"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2 px-2 pb-3 mx-auto bg-gradient-primary rounded"style="height:100px;" >
+                        <div class="ng  mb-2" alt="" ><p class="text-center">add image</p>
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    <a (click)="openAddImage(addImageModal)">
+                                        <i class="fas fa-plus fs-1"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span style="color: black;font-weight: 700;" class="text-primary">Description: </span>
+                    <p>{{vehicle.description}}</p>
+                    <div class="row pt-2">
+                        <div class="col-md-3 col-6 mb-2">
+                            <i class="fa fa-car text-primary mr-2"></i>
+                            <span>Model: {{vehicle.model}}</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <i class="fa fa-cogs text-primary mr-2"></i>
+                            <span>franchise: {{vehicle.franchise}}</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <i class="fa fa-road text-primary mr-2"></i>
+                            <span>{{vehicle.nbrOfKm}} Km/h</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <i class="fa fa-eye  text-primary mr-2"></i>
+                            <span>First Circulation : {{vehicle.dateFirstCirculation|date}}</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2" style="font-size: 0.9rem;">
+                            <i class="fa fa-eye text-primary mr-2"></i>
+                            <span>Category: {{vehicle.category.description}}</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <i class="fa fa-roadtext-primary mr-2"></i>
+                            <span>Type : {{vehicle.category.typeVehicle}}</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <i class="fa fa-cogs text-primary mr-2"></i>
+                            <span>Price: {{vehicle.dailyPrice|currency}}</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <i class="fa fa-car text-primary mr-2"></i>
+                            <span>GPS Navigation</span>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-md-12  col-12 mb-2" *ngIf="office">
+                            <span style="color: black;font-weight: 700;" class="text-primary">Office Details : </span>
+                            <span>City : {{office.city}} ,</span>
+                            <span>address: {{office.address}} ,</span>
+                            <span> Phone :<a [href]="office.phone">{{office.phone}} </a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Add Image Modal -->
+    <ng-template #addImageModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title"> <span>Add Image</span></h4>
+        </div>
+        <div class="modal-header">
+            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <div class="model-body">
+            <div class="mb-3">
+                <label class="form-label mx-3">Image</label>
+                <input type="file" (change)="changeImage($event)" id="">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Save click');addImage()">Save</button>
+        </div>
+    </ng-template>
+    <!-- End Image Modal -->
+
+    <!-- Update Image Modal -->
+    <ng-template #updateImageModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title"> <span>Update Image</span></h4>
+        </div>
+        <div class="modal-header">
+            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <div class="model-body">
+            <div class="mb-3">
+                <label class="form-label mx-3">Image</label>
+                <input type="file" (change)="changeImage($event)" id="">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Save click');updateImage()">Save</button>
+        </div>
+    </ng-template>
+    <!-- End Image Modal -->

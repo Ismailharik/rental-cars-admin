@@ -1,0 +1,155 @@
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex">
+                        <h6 class="text-white text-capitalize ps-3">Orders Table</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Order id
+                                    </th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        PickUpDate</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Duration</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        OfficeId</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        VehicleId</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Total Price</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Confirmed</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Handle Order</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="orders">
+                                <tr *ngFor="let order of orders;let i = index">
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{order.id}}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{order.pickUpDate|date}}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{order.duration}}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{order.officeId}}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{order.vehicleId}}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{order.totalPrice|currency}}
+                                        </p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm "
+                                            [ngClass]="order.confirmed==true?'bg-gradient-success':'bg-gradient-primary'">
+                                            <span *ngIf="order.confirmed">Available</span>
+                                            <span *ngIf="!order.confirmed">unavailable</span>
+                                        </span>
+                                    </td>
+                                    <!-- <td class="align-middle text-center">
+                                        <span
+                                            class="text-secondary text-xs font-weight-bold">HHHHH</span>
+                                    </td> -->
+                                    <td class="align-middle">
+                                        <a (click)="open(ordersModal,order)"
+                                            class="text-secondary font-weight-bold text-ls" data-toggle="tooltip">
+                                            Edit &nbsp;&nbsp;&nbsp;&nbsp; |
+                                        </a>
+                                        <a class="text-danger font-weight-bold text-ls" data-toggle="tooltip"
+                                            (click)="deleteOrder(order.id)">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;Delete
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<ng-template #ordersModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> <span>Update Order</span></h4>
+    </div>
+    <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="model-body">
+        <form [formGroup]="orderForm">
+            <div class="mb-3">
+                <label class="form-label">id</label>
+                <input class="form-control" formControlName="id">
+            </div>
+            <div class="mb-3 ">
+                <label class="form-label">pickUpDate</label>
+                <input class="form-control" type="date" formControlName="pickUpDate">
+            </div>
+            <div class="mb-3 ">
+                <label class="form-label">duration</label>
+                <input class="form-control" type="number" formControlName="duration">
+            </div>
+            <div class="mb-3 ">
+                <label class="form-label">officeId</label>
+                <input class="form-control"type="number" formControlName="officeId">
+            </div>
+            <div class="mb-3 ">
+                <label class="form-label">vehicleId</label>
+                <input class="form-control"type="number" formControlName="vehicleId">
+            </div>
+            <div class="mb-3 ">
+                <label class="form-label">totalPrice</label>
+                <input class="form-control"type="number" formControlName="totalPrice">
+            </div>
+            <div class="mb-3 ">
+                <label class="form-label">confirmed</label>
+                <input class="form-control" formControlName="confirmed">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">customerId</label>
+                <input class="form-control"type="number" formControlName="customerId">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">paid</label>
+                <input class="form-control" type="boolean" formControlName="paid">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click');updateOrder()">Save</button>
+    </div>
+</ng-template>

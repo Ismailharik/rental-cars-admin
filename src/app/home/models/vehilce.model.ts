@@ -1,3 +1,6 @@
+import { Category } from "./category.model";
+import { Office } from "./office.model";
+
 export interface Vehicle{
     id:number,
     title:string,
@@ -10,4 +13,6 @@ export interface Vehicle{
     available:boolean,
     urls:string[],
     officeId:number,
+    category:Category
+    office:Office
 }

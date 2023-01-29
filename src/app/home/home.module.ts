@@ -10,8 +10,9 @@ import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VehilcesComponent } from './components/vehilces/vehilces.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { VehilcesImagesComponent } from './components/vehilces-images/vehilces-images.component';
 import { RouterModule } from '@angular/router';
+import { OrdersComponent } from './components/orders/orders.component';
+import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     CustomerComponent,
     ModalComponent,
     VehilcesComponent,
-    VehilcesImagesComponent,
+    OrdersComponent,
+    VehicleDetailsComponent,
   ],
   imports: [
     CommonModule,

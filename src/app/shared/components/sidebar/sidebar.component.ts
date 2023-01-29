@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
     this.color=selected
   }
   
+  
 
 
 }
