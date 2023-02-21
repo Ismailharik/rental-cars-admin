@@ -44,7 +44,7 @@ export class VehicleDetailsComponent implements OnInit {
           this.vehicle = resp
           console.log(this.vehicle);
 
-          this.getOfficeById(this.vehicle.id)
+          this.getOfficeById(this.vehicle.officeId)
         }
       })
     }
@@ -145,5 +145,7 @@ export class VehicleDetailsComponent implements OnInit {
     this.selectedImage = event.target.files.item(0);
   }
 
-
+deleteVehicle(){
+  // this.vehiclesService.
+}
 }

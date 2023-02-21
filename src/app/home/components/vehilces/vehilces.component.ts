@@ -79,6 +79,7 @@ export class VehilcesComponent implements OnInit {
       franchise: [vehicle?.franchise],
       model: [vehicle?.model],
       available: [vehicle?.available],
+      officeId : [vehicle?.officeId]
     })
   }
 
@@ -116,7 +117,6 @@ export class VehilcesComponent implements OnInit {
   }
   changeImage(event:any){
     this.selectedImage = event.target.files.item(0);
-    
   }
   saveUpdate() {
     console.log(this.vehicleForm.value);
@@ -127,9 +127,18 @@ export class VehilcesComponent implements OnInit {
       }
     })
     console.log("------------");
-
   }
-  deleteCustomer(id: number) {
-    console.log(id);
+
+  deleteVehicle(id:number){
+      this.vehiclesService.deleteVehicle(id).subscribe({
+        next : resp =>{
+          alert("vehicle deleted successfully")
+          this.getAllVehicles()
+        },
+        error : err =>{
+          console.log(err);
+          
+        }
+      })
   }
 }

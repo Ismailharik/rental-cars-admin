@@ -11,7 +11,9 @@ import { VehilcesComponent } from "./app/home/components/vehilces/vehilces.compo
 
 const routes: Routes = [
     {path:'home',component:DashboardComponent},
-    {path:'customers',component:CustomerComponent},
+    {path:'customers',component:CustomerComponent,
+    // canActivate : [AuthGuard] , data:{ roles : ['ADMIN']}
+    },
     {path:'vehicles',component:VehilcesComponent},
     {path:'orders',component:OrdersComponent},
     {path:'vehicles/:id',component:VehicleDetailsComponent},

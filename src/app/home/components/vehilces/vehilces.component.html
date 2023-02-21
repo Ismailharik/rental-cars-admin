@@ -39,8 +39,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         model</th>
-                                    <th class="text-secondary opacity-7"></th>
-
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        handle vehicle</th>
                                 </tr>
                             </thead>
                             <tbody *ngIf="vehicles">
@@ -82,16 +83,16 @@
                                         <span
                                             class="text-secondary text-xs font-weight-bold">{{vehicle.model|date}}</span>
                                     </td>
-                                    <td class="align-middle">
-                                        <a (click)="open(vehicleModal,vehicle,i)"
-                                            class="text-secondary font-weight-bold text-ls" data-toggle="tooltip">
-                                            Edit &nbsp;&nbsp;&nbsp;&nbsp; |
+                                    <td class="align-middle text-center">
+                                        <a class="btn btn-link text-dark px-3 mb-0"
+                                            (click)="open(vehicleModal,vehicle,i)">
+                                            <i class="material-icons text-sm me-2">edit</i>
                                         </a>
-                                        <a class="text-danger font-weight-bold text-ls" data-toggle="tooltip"
-                                            (click)="deleteCustomer(vehicle.id)">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;Delete
+
+                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0">
+                                            <i class="material-icons text-sm me-2" (click)="deleteVehicle(vehicle.id)">delete</i>
                                         </a>
-                                        <a class=" font-weight-bold text-ls"style="color:green"  data-toggle="tooltip"
+                                        <a class="align-middle  text-center font-weight-bold text-ls"style="color:green"  data-toggle="tooltip"
                                         [routerLink]="'/vehicles/'+vehicle.id">
                                         &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: large;">+</span>
                                         </a>
@@ -112,7 +113,7 @@
 
 <ng-template #vehicleModal let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title"> <span>Update Customer</span></h4>
+        <h4 class="modal-title" id="modal-basic-title"> <span>Update Vehicle</span></h4>
     </div>
     <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
@@ -152,6 +153,10 @@
                 <input class="form-control" formControlName="model">
             </div>
             <div class="mb-3">
+                <label class="form-label">office id</label>
+                <input class="form-control" formControlName="officeId">
+            </div>
+            <div class="mb-3">
                 <label class="form-label">available</label>
                 <input class="form-control" type="boolean" formControlName="available">
             </div>
@@ -178,7 +183,6 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button"  class="btn btn-outline-dark"
-            (click)="c('Save click');addImage()">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click');addImage()">Save</button>
     </div>
 </ng-template>

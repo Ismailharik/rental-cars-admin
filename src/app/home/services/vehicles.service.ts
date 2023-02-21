@@ -66,4 +66,7 @@ export class VehiclesService {
   getVehicleById(id: number): Observable<Vehicle> {
     return this.httpClient.get<Vehicle>(environment.host + "/vehicles/" + id);
   }
+  deleteVehicle(vehicleId:number){
+    return this.httpClient.delete<Vehicle>(environment.host +"/vehicles/"+vehicleId)
+  }
 }

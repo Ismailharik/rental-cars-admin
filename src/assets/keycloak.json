@@ -1,0 +1,12 @@
+{
+    "realm": "rental_cars",
+    "auth-server-url": "http://localhost:8080/auth/",
+    "ssl-required": "external",
+    "resource": "rental-cars-client",
+    "verify-token-audience": true,
+    "credentials": {
+        "secret": "2HIStFS3pFeSaKh4pXl9V17mgnh7cDsk"
+    },
+    "use-resource-role-mappings": true,
+    "confidential-port": 0
+}
