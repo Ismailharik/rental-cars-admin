@@ -125,11 +125,13 @@
         </div>
     </div>
 </div>
-
-<ngb-pagination
+<div class="col col-12 mx-auto d-flex justify-content-center" >
+    <ngb-pagination
   [(page)]="page"
   [pageSize]="pageSize"
   [collectionSize]="vehicles.length"></ngb-pagination>
+
+</div>
 
 <!-- Start Update Vehicle Model -->
 <ng-template #updateVehicleModel let-c="close" let-d="dismiss">

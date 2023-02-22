@@ -105,11 +105,13 @@
 </div>
 
 
-
-<ngb-pagination
+<div class="col col-12 mx-auto d-flex justify-content-center" >
+    <ngb-pagination
   [(page)]="page"
   [pageSize]="pageSize"
   [collectionSize]="orders.length"></ngb-pagination>
+
+</div>
 
 <!-- Start orders modal  -->
 <ng-template #ordersModal let-c="close" let-d="dismiss">

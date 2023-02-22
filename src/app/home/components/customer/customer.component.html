@@ -79,11 +79,12 @@
         </div>
     </div>
 </div>
-<ngb-pagination
-  [(page)]="page"
-  [pageSize]="pageSize"
-  [collectionSize]="customers.length"></ngb-pagination>
-    
+<div class="col col-12 mx-auto d-flex justify-content-center" >
+    <ngb-pagination *ngIf="customers" [(page)]="page" [pageSize]="pageSize"
+        [collectionSize]="customers.length"></ngb-pagination>
+</div>
+
+
 
 <ng-template #customerModal let-c="close" let-d="dismiss">
 
@@ -133,7 +134,7 @@
                 <div class="col">
                     <input type="date" class="form-control" formControlName="birthdate" placeholder="Birthdate">
                 </div>
-                
+
             </div>
             <div class="m-3 row form-check form-switch">
                 <input class="form-check-input form-control" formControlName="status" type="checkbox" role="switch"
