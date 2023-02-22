@@ -13,7 +13,8 @@ export class CustomerComponent implements OnInit {
 
   customers!: Customer[]
   customerForm!: FormGroup;
-
+  page:number=1
+  pageSize:number=5
 
   constructor(
     private homeServices: HomeService, 

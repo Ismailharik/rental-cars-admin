@@ -12,79 +12,85 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Order id
                                     </th>
                                     <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center ">
                                         PickUpDate</th>
                                     <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center ">
                                         Duration</th>
                                     <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center ">
                                         OfficeId</th>
                                     <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center ">
                                         VehicleId</th>
                                     <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center ">
                                         Total Price</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7">
                                         Confirmed</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Handle Order</th>
+                                        <th
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7">
+                                        Payement</th>
+                                    <th class="text-uppercase  opacity-7">
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody *ngIf="orders">
-                                <tr *ngFor="let order of orders;let i = index">
+                                <tr *ngFor="let order of orders| slice: (page-1) * pageSize : page * pageSize;let i = index">
                                     <td>
-                                        <div class="d-flex px-2 py-1">
+                                        <div class="d-flex px-2 py-1 ">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{order.id}}</h6>
+                                                <h6 class="mb-0 text-sm ">{{order.id}}</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{order.pickUpDate|date}}
+                                        <p class="text-xs text-center font-weight-bold mb-0">{{order.pickUpDate|date}}
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{order.duration}}
+                                        <p class="text-xs text-center font-weight-bold mb-0">{{order.duration}}
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{order.officeId}}
+                                        <p class="text-xs text-center font-weight-bold mb-0">{{order.officeId}}
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{order.vehicleId}}
+                                        <p class="text-xs text-center font-weight-bold mb-0">{{order.vehicleId}}
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{order.totalPrice|currency}}
+                                        <p class="text-xs text-center font-weight-bold mb-0">
+                                            {{order.totalPrice|currency}}
                                         </p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm "
                                             [ngClass]="order.confirmed==true?'bg-gradient-success':'bg-gradient-primary'">
-                                            <span *ngIf="order.confirmed">Available</span>
-                                            <span *ngIf="!order.confirmed">unavailable</span>
+                                            <span *ngIf="order.confirmed">confirmed</span>
+                                            <span *ngIf="!order.confirmed">unconfirmed</span>
                                         </span>
                                     </td>
-                                    <!-- <td class="align-middle text-center">
-                                        <span
-                                            class="text-secondary text-xs font-weight-bold">HHHHH</span>
-                                    </td> -->
-                                    <td class="align-middle">
-                                        <a (click)="open(ordersModal,order)"
-                                            class="text-secondary font-weight-bold text-ls" data-toggle="tooltip">
-                                            Edit &nbsp;&nbsp;&nbsp;&nbsp; |
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm "
+                                            [ngClass]="order.paid==true?'bg-gradient-success':'bg-gradient-primary'">
+                                            <span *ngIf="order.paid">paid</span>
+                                            <span *ngIf="!order.paid">upaid</span>
+                                        </span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a class="btn btn-link text-dark px-3 mb-0" (click)="open(ordersModal,order)">
+                                            <i class="material-icons text-sm me-2">edit</i>
                                         </a>
-                                        <a class="text-danger font-weight-bold text-ls" data-toggle="tooltip"
-                                            (click)="deleteOrder(order.id)">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;Delete
+                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0">
+                                            <i class="material-icons text-sm me-2"
+                                                (click)="deleteOrder(order.id)">delete</i>
                                         </a>
 
                                     </td>
@@ -100,52 +106,70 @@
 
 
 
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="orders.length"></ngb-pagination>
 
-
+<!-- Start orders modal  -->
 <ng-template #ordersModal let-c="close" let-d="dismiss">
+
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title"> <span>Update Order</span></h4>
-    </div>
-    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title"> <span>Update Order</span></h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
     </div>
     <div class="model-body">
         <form [formGroup]="orderForm">
-            <div class="mb-3">
-                <label class="form-label">id</label>
-                <input class="form-control" formControlName="id">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">Id</label>
+                <div class="col">
+                    <input class="form-control" readonly formControlName="id">
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">pickUpDate</label>
-                <input class="form-control" type="date" formControlName="pickUpDate">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">PickUpDate</label>
+                <div class="col">
+                    <input class="form-control" type="date" formControlName="pickUpDate">
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">duration</label>
-                <input class="form-control" type="number" formControlName="duration">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">Duration</label>
+                <div class="col">
+                    <input class="form-control" type="number" formControlName="duration">
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">officeId</label>
-                <input class="form-control"type="number" formControlName="officeId">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">Office Id</label>
+                <div class="col">
+                    <input class="form-control" type="number" formControlName="officeId">
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">vehicleId</label>
-                <input class="form-control"type="number" formControlName="vehicleId">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">Vehicle Id</label>
+                <div class="col">
+                    <input class="form-control" type="number" formControlName="vehicleId">
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">totalPrice</label>
-                <input class="form-control"type="number" formControlName="totalPrice">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">Total Price</label>
+                <div class="col">
+                    <input class="form-control" type="number" formControlName="totalPrice">
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">confirmed</label>
-                <input class="form-control" formControlName="confirmed">
+
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">pickUpDate</label>
+                <div class="col">
+                    <input class="form-control" type="number" formControlName="customerId">
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">customerId</label>
-                <input class="form-control"type="number" formControlName="customerId">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">paid</label>
-                <input class="form-control" type="boolean" formControlName="paid">
+            <div class="m-3 row form-check form-switch">
+                <input class="form-check-input form-control"  formControlName="paid" type="checkbox" role="switch"
+                    id="flexSwitchCheckDefault">
+                <label class="form-check-label " for="flexSwitchCheckDefault">check confirmation </label>
+                <input class="form-check-input form-control"  formControlName="confirmed" type="checkbox" role="switch"
+                    id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">check payment </label>
             </div>
         </form>
     </div>
@@ -153,3 +177,4 @@
         <button type="button" class="btn btn-outline-dark" (click)="c('Save click');updateOrder()">Save</button>
     </div>
 </ng-template>
+<!-- End orders modal  -->

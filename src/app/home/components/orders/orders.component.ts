@@ -13,6 +13,10 @@ export class OrdersComponent implements OnInit {
 
   orders!:Order[]
   orderForm!: FormGroup;
+
+  // pagination variables
+  page=1
+  pageSize=10
   constructor(
     private ordersService: OrdersService, 
     config: NgbModalConfig, 

@@ -20,6 +20,11 @@ export class VehilcesComponent implements OnInit {
   indexOfUpdatedVehicle!: number;
   selectedImage!: File
 
+  //pagination variables
+  page:number = 1
+  pageSize:number = 5
+
+  categoryId: number = 0 // used in add new Vehicle Model
   constructor(
     private vehiclesService: VehiclesService,
     config: NgbModalConfig,
@@ -79,7 +84,8 @@ export class VehilcesComponent implements OnInit {
       franchise: [vehicle?.franchise],
       model: [vehicle?.model],
       available: [vehicle?.available],
-      officeId : [vehicle?.officeId]
+      officeId: [vehicle?.officeId],
+      categoryId: [vehicle?.category?.id]
     })
   }
 
@@ -98,24 +104,24 @@ export class VehilcesComponent implements OnInit {
   }
   addImage() {
     console.log(this.selectedImage);
-    this.vehiclesService.addImage(this.selectedImageId,this.selectedImage).subscribe({
+    this.vehiclesService.addImage(this.selectedImageId, this.selectedImage).subscribe({
       next: resp => {
         if (resp.type == HttpEventType.UploadProgress) {
           this.getAllVehicles();// refresh page
           console.log("success");
-          
+
         } else if (resp instanceof HttpResponse) {
           //stop alert
         }
         console.log("sucess");
         this.getAllVehicles()
-        
+
       },
       error: err => {
       }
     })
   }
-  changeImage(event:any){
+  changeImage(event: any) {
     this.selectedImage = event.target.files.item(0);
   }
   saveUpdate() {
@@ -129,16 +135,35 @@ export class VehilcesComponent implements OnInit {
     console.log("------------");
   }
 
-  deleteVehicle(id:number){
-      this.vehiclesService.deleteVehicle(id).subscribe({
-        next : resp =>{
-          alert("vehicle deleted successfully")
-          this.getAllVehicles()
-        },
-        error : err =>{
-          console.log(err);
-          
-        }
-      })
+  deleteVehicle(id: number) {
+    this.vehiclesService.deleteVehicle(id).subscribe({
+      next: resp => {
+        alert("vehicle deleted successfully")
+        this.getAllVehicles()
+      },
+      error: err => {
+        console.log(err);
+
+      }
+    })
+  }
+  saveVehicle() {
+    console.log(this.vehicleForm.value);
+    const vehicle: Vehicle = this.vehicleForm.value;
+    console.log(vehicle);
+    
+    // this.vehiclesService.addVehicle(vehicle, this.categoryId).subscribe({
+    //   next: resp => {
+    //     alert("Vehicle Added Successfully ")
+    //   },
+    //   error: err => {
+    //     console.log(err);
+
+    //   }
+    // })
+
+
+    //  this.vehiclesService.addVehicle(this.vehicleForm.value,).
+
   }
 }

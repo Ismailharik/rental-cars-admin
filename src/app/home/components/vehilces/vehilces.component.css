@@ -2,3 +2,8 @@ a{
     cursor: pointer;
     text-decoration: none;
 }
+
+.text-secondary {
+    --bs-text-opacity: auto;
+    color: rgba(var(--bs-secondary-rgb),var(--bs-text-opacity))!important;
+}

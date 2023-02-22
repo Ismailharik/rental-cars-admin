@@ -9,7 +9,7 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VehilcesComponent } from './components/vehilces/vehilces.component';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbPagination, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { OrdersComponent } from './components/orders/orders.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
@@ -34,7 +34,8 @@ import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-de
     ReactiveFormsModule,
     FormsModule,
     NgbDropdownModule ,
-    RouterModule
+    RouterModule,
+    NgbPaginationModule
 
   ],
   exports:[

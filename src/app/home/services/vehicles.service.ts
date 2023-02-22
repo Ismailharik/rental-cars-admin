@@ -10,6 +10,9 @@ import { Vehicle } from '../models/vehilce.model';
   providedIn: 'root'
 })
 export class VehiclesService {
+  addVehicle(vehicle: Vehicle,categoryId:number):Observable<Vehicle> {
+    return this.httpClient.post<Vehicle>(environment.host + '/vehicles/'+categoryId,vehicle)
+  }
 
   deleteImage(vehicleId: number, imageIndex: number) {
     return this.httpClient.delete<any>(environment.host+ '/vehicles/images/'+vehicleId+"/"+imageIndex);

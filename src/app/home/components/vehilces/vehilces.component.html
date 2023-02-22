@@ -3,18 +3,24 @@
         <div class="col-12">
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex">
-                        <h6 class="text-white text-capitalize ps-3">Vehicles Table</h6>
-                        <div ngbDropdown class="" *ngIf="categories">
-                            <button type="button" class="btn mt-n2" id="dropdown1" ngbDropdownToggle>Select
-                                Category</button>
-                            <div ngbDropdownMenu aria-labelledby="dropdown1">
-                                <!-- items as buttons -->
-                                <button ngbDropdownItem (click)="getAllVehicles()">All</button>
-                                <button ngbDropdownItem *ngFor="let cateogry of categories"
-                                    (click)="getVehilclesByCategory(cateogry.id)">{{cateogry.typeVehicle}}</button>
+                    <div
+                        class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between">
+                        <div class="d-flex font-weight-bolder mx-2">
+                            <h5 class="text-white text-capitalize ps-3">Vehicles Table</h5>
+                            <div ngbDropdown class="" *ngIf="categories">
+                                <button type="button" class="btn mt-n1" id="dropdown1" ngbDropdownToggle>Select
+                                    Category</button>
+                                <div ngbDropdownMenu aria-labelledby="dropdown1">
+                                    <!-- items as buttons -->
+                                    <button ngbDropdownItem (click)="getAllVehicles()">All</button>
+                                    <button ngbDropdownItem *ngFor="let cateogry of categories"
+                                        (click)="getVehilclesByCategory(cateogry.id)">{{cateogry.typeVehicle}}</button>
+                                </div>
                             </div>
                         </div>
+                        <a class="btn bg-gradient-dark mb-0 mx-2 " (click)="open(addVehicleModel)">
+                            <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Vehicle
+                        </a>
                     </div>
 
 
@@ -24,28 +30,32 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Info
                                     </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Model</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Daily Price</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                        first circulation</th>
+                                    <th
+                                        class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                        cateogry</th>
+                                    <th
+                                        class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Available</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        model</th>
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    </th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        handle vehicle</th>
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody *ngIf="vehicles">
-                                <tr *ngFor="let vehicle of vehicles;let i = index">
+                                <tr *ngFor="let vehicle of vehicles| slice: (page-1) * pageSize : page * pageSize;let i = index">
 
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -72,33 +82,41 @@
                                         <p class="text-xs font-weight-bold mb-0">{{vehicle.dailyPrice|currency}}
                                         </p>
                                     </td>
-                                    <td class="align-middle text-center text-sm">
+
+                                    <td >
+                                        <p
+                                            class="text-xs font-weight-bold mb-0">{{vehicle.dateFirstCirculation|date}}
+                                    </p>
+                                    </td>
+                                    <td class="align-middle " *ngIf="vehicle.category">
+                                        <span
+                                            class="text-secondary text-xs font-weight-bold">{{vehicle.category.typeVehicle}}
+                                        </span>
+                                    </td>
+                                    <td class="align-middle  text-sm">
                                         <span class="badge badge-sm "
                                             [ngClass]="vehicle.available==true?'bg-gradient-success':'bg-gradient-primary'">
                                             <span *ngIf="vehicle.available">Available</span>
                                             <span *ngIf="!vehicle.available">unavailable</span>
                                         </span>
                                     </td>
-                                    <td class="align-middle text-center">
-                                        <span
-                                            class="text-secondary text-xs font-weight-bold">{{vehicle.model|date}}</span>
-                                    </td>
-                                    <td class="align-middle text-center">
+
+                                    <td class="align-middle ">
                                         <a class="btn btn-link text-dark px-3 mb-0"
-                                            (click)="open(vehicleModal,vehicle,i)">
+                                            (click)="open(updateVehicleModel,vehicle,i)">
                                             <i class="material-icons text-sm me-2">edit</i>
                                         </a>
-
                                         <a class="btn btn-link text-danger text-gradient px-3 mb-0">
-                                            <i class="material-icons text-sm me-2" (click)="deleteVehicle(vehicle.id)">delete</i>
+                                            <i class="material-icons text-sm me-2"
+                                                (click)="deleteVehicle(vehicle.id)">delete</i>
                                         </a>
-                                        <a class="align-middle  text-center font-weight-bold text-ls"style="color:green"  data-toggle="tooltip"
-                                        [routerLink]="'/vehicles/'+vehicle.id">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: large;">+</span>
+                                        <a class="align-middle   font-weight-bold text-ls"
+                                            style="color:green" data-toggle="tooltip"
+                                            [routerLink]="'/vehicles/'+vehicle.id">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: large;">+</span>
                                         </a>
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -108,57 +126,91 @@
     </div>
 </div>
 
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="vehicles.length"></ngb-pagination>
 
+<!-- Start Update Vehicle Model -->
+<ng-template #updateVehicleModel let-c="close" let-d="dismiss">
 
-
-<ng-template #vehicleModal let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title"> <span>Update Vehicle</span></h4>
-    </div>
-    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title"> <span>Update Vehicle</span></h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
     </div>
     <div class="model-body">
         <form [formGroup]="vehicleForm">
-            <div class="mb-3">
-                <label class="form-label">id</label>
-                <input class="form-control" formControlName="id">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">id</label>
+                <div class="col">
+                    <input class="form-control" readonly formControlName="id">
+                </div>
+
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">title</label>
-                <input class="form-control" formControlName="title">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">title</label>
+                <div class="col">
+                    <input class="form-control" formControlName="title">
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">description</label>
-                <input class="form-control" formControlName="description">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">description</label>
+                <div class="col">
+                    <input class="form-control" formControlName="description">
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">dailyPrice</label>
-                <input class="form-control" formControlName="dailyPrice">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">dailyPrice</label>
+                <div class="col">
+                    <input class="form-control" formControlName="dailyPrice">
+
+                </div>
+
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">dateFirstCirculation</label>
-                <input class="form-control" type="date" formControlName="dateFirstCirculation">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">First Circulation</label>
+                <div class="col">
+                    <input class="form-control" type="date" formControlName="dateFirstCirculation">
+
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">nbrOfKm</label>
-                <input class="form-control" formControlName="nbrOfKm">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">nbrOfKm</label>
+                <div class="col">
+                    <input class="form-control" formControlName="nbrOfKm">
+
+                </div>
             </div>
-            <div class="mb-3 ">
-                <label class="form-label">franchise</label>
-                <input class="form-control" formControlName="franchise">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">franchise</label>
+                <div class="col">
+                    <input class="form-control" formControlName="franchise">
+
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">model</label>
-                <input class="form-control" formControlName="model">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">model</label>
+                <div class="col">
+                    <input class="form-control" formControlName="model">
+
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">office id</label>
-                <input class="form-control" formControlName="officeId">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">office id</label>
+                <div class="col">
+                    <input class="form-control" formControlName="officeId">
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">available</label>
-                <input class="form-control" type="boolean" formControlName="available">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">category id</label>
+                <div class="col">
+                    <input class="form-control" formControlName="categoryId">
+                </div>
+            </div>
+            <div class="m-3 row form-check form-switch">
+                <input class="form-check-input form-control" formControlName="available" type="checkbox" role="switch"
+                    id="flexSwitchCheckDefault">
+                <label class="form-check-label " for="flexSwitchCheckDefault">check availability </label>
             </div>
         </form>
     </div>
@@ -167,8 +219,98 @@
             (click)="c('Save click');saveUpdate()">Save</button>
     </div>
 </ng-template>
+<!-- End Update Vehicle Model -->
+<!-- Start Add New Vehicle Model -->
+<ng-template #addVehicleModel let-c="close" let-d="dismiss">
 
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> <span>Update Vehicle</span></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="model-body">
+        <form [formGroup]="vehicleForm">
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">id</label>
+                <div class="col">
+                    <input class="form-control" readonly formControlName="id">
+                </div>
 
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">title</label>
+                <div class="col">
+                    <input class="form-control" formControlName="title">
+                </div>
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">description</label>
+                <div class="col">
+                    <input class="form-control" formControlName="description">
+                </div>
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">dailyPrice</label>
+                <div class="col">
+                    <input class="form-control" formControlName="dailyPrice">
+
+                </div>
+
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">First Circulation</label>
+                <div class="col">
+                    <input class="form-control" type="date" formControlName="dateFirstCirculation">
+
+                </div>
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">nbrOfKm</label>
+                <div class="col">
+                    <input class="form-control" formControlName="nbrOfKm">
+
+                </div>
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">franchise</label>
+                <div class="col">
+                    <input class="form-control" formControlName="franchise">
+
+                </div>
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">model</label>
+                <div class="col">
+                    <input class="form-control" formControlName="model">
+
+                </div>
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">office id</label>
+                <div class="col">
+                    <input class="form-control" formControlName="officeId">
+                </div>
+            </div>
+            <div class="m-3 row d-flex">
+                <label class="col-sm-4 col-form-label">category id</label>
+                <div class="col">
+                    <input class="form-control" [(ngModel)]="categoryId" [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+            <div class="m-3 form-check form-switch">
+                <input class="form-check-input form-control" formControlName="available" type="checkbox" role="switch"
+                    id="flexSwitchCheckDefault">
+                <label class="form-check-label " for="flexSwitchCheckDefault">check availability </label>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" href="/vehicles" class="btn btn-outline-dark"
+            (click)="c('Save click');saveVehicle()">Save</button>
+    </div>
+</ng-template>
+<!-- End  Add New Vehicle Model -->
+
+<!-- Start Update Vehicle Model -->
 <ng-template #imageModal let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title"> <span>Add Image</span></h4>
@@ -186,3 +328,4 @@
         <button type="button" class="btn btn-outline-dark" (click)="c('Save click');addImage()">Save</button>
     </div>
 </ng-template>
+<!-- End Update Vehicle Model -->
