@@ -18,7 +18,7 @@
 //             console.log("Securing Initialization ...");
 
 //             this.kc = new Keycloak({
-//                 url: "http://localhost:8080/auth/",
+//                 url: 'http://localhost:8080/auth',
 //                 realm: "rental_cars",
 //                 clientId: "rental-cars-front" // web app name
 //             });
