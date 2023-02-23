@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from 'src/app/shared/components/toasts/toast-service';
 import { Order } from '../../models/order.model';
 import { OrdersService } from '../../services/orders.service';
 
@@ -11,17 +12,20 @@ import { OrdersService } from '../../services/orders.service';
 })
 export class OrdersComponent implements OnInit {
 
-  orders!:Order[]
+  orders!: Order[]
   orderForm!: FormGroup;
 
   // pagination variables
-  page=1
-  pageSize=10
+  page = 1
+  pageSize = 5
   constructor(
-    private ordersService: OrdersService, 
-    config: NgbModalConfig, 
+    private ordersService: OrdersService,
+    config: NgbModalConfig,
     private modalService: NgbModal,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    public toastService: ToastService
+
+  ) {
 
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -31,13 +35,10 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.getAllOrders()
   }
-  addOrder(){
 
-  }
-
-  initializeForm(order:Order){
+  initializeForm(order: Order) {
     this.orderForm = this.fb.group({
-      id:[order.id], 
+      id: [order.id],
       pickUpDate: [order.pickUpDate],
       duration: [order.duration],
       officeId: [order.officeId],
@@ -45,48 +46,71 @@ export class OrdersComponent implements OnInit {
       totalPrice: [order.totalPrice],
       confirmed: [order.confirmed],
       customerId: [order.customerId],
-      paid:[order.paid]
+      paid: [order.paid]
     })
   }
-  open(content: any,order:Order) { 
-   this.initializeForm(order);
+  open(content: any, order: Order) {
+    this.initializeForm(order);
     this.modalService.open(content);
   }
-  getAllOrders(){
+  getAllOrders() {
     this.ordersService.getAllOrders().subscribe({
-      next : resp =>{
+      next: resp => {
         this.orders = resp
         console.log(resp);
       },
-      error : err=>{
+      error: err => {
         console.log(err);
-        
+
       }
     })
   }
-  deleteOrder(id:number){
+  deleteOrder(id: number) {
     this.ordersService.deleteOrder(id).subscribe({
-      next : resp =>{
-        console.log("success");
+      next: resp => {
+        this.showDanger("order deleted successfully")
         this.getAllOrders()
       },
-      error : err =>{
+      error: err => {
         console.log(err);
-        
+
       }
     })
   }
-  updateOrder(){
+  updateOrder() {
     console.log(this.orderForm.value);
-    
+    this.showSuccess("order updated successfully")
     this.ordersService.updateOrder(this.orderForm.value).subscribe({
-        next : resp =>{
-          console.log(resp);
-          this.getAllOrders()
-        },
-        error : err=>{
-          console.log(err);
-        }
+      next: resp => {
+        console.log(resp);
+        this.getAllOrders()
+      },
+      error: err => {
+        console.log(err);
+      }
     })
   }
+
+
+
+
+
+
+  // Start toasts methods
+  showStandard(message: string) {
+    this.toastService.show(message);
+  }
+
+  showSuccess(message: string) {
+    this.toastService.show(message, { classname: 'bg-success text-light', delay: 10000 });
+  }
+
+  showDanger(message: string) {
+    this.toastService.show(message, { classname: 'bg-gradient-primary text-light', delay: 15000 });
+  }
+
+  ngOnDestroy(): void {
+    this.toastService.clear();
+  }
+  //End toasts method
 }

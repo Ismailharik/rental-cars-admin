@@ -37,8 +37,7 @@
                                         Model</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Daily Price</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         first circulation</th>
                                     <th
                                         class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
@@ -46,16 +45,15 @@
                                     <th
                                         class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Available</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                     </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                     </th>
                                 </tr>
                             </thead>
                             <tbody *ngIf="vehicles">
-                                <tr *ngFor="let vehicle of vehicles| slice: (page-1) * pageSize : page * pageSize;let i = index">
+                                <tr
+                                    *ngFor="let vehicle of vehicles| slice: (page-1) * pageSize : page * pageSize;let i = index">
 
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -83,10 +81,9 @@
                                         </p>
                                     </td>
 
-                                    <td >
-                                        <p
-                                            class="text-xs font-weight-bold mb-0">{{vehicle.dateFirstCirculation|date}}
-                                    </p>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{vehicle.dateFirstCirculation|date}}
+                                        </p>
                                     </td>
                                     <td class="align-middle " *ngIf="vehicle.category">
                                         <span
@@ -110,9 +107,8 @@
                                             <i class="material-icons text-sm me-2"
                                                 (click)="deleteVehicle(vehicle.id)">delete</i>
                                         </a>
-                                        <a class="align-middle   font-weight-bold text-ls"
-                                            style="color:green" data-toggle="tooltip"
-                                            [routerLink]="'/vehicles/'+vehicle.id">
+                                        <a class="align-middle   font-weight-bold text-ls" style="color:green"
+                                            data-toggle="tooltip" [routerLink]="'/vehicles/'+vehicle.id">
                                             &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: large;">+</span>
                                         </a>
                                     </td>
@@ -125,11 +121,9 @@
         </div>
     </div>
 </div>
-<div class="col col-12 mx-auto d-flex justify-content-center" >
-    <ngb-pagination
-  [(page)]="page"
-  [pageSize]="pageSize"
-  [collectionSize]="vehicles.length"></ngb-pagination>
+<div class="col col-12 mx-auto d-flex justify-content-center">
+    <ngb-pagination *ngIf="vehicles" [(page)]="page" [pageSize]="pageSize"
+        [collectionSize]="vehicles.length"></ngb-pagination>
 
 </div>
 
@@ -331,3 +325,9 @@
     </div>
 </ng-template>
 <!-- End Update Vehicle Model -->
+
+
+
+
+<!-- Toaster -->
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from 'src/app/shared/components/toasts/toast-service';
 import { Customer } from '../../models/customer.model';
 import { HomeService } from '../../services/home.service';
 
@@ -20,7 +21,9 @@ export class CustomerComponent implements OnInit {
     private homeServices: HomeService, 
     config: NgbModalConfig, 
     private modalService: NgbModal,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    public toastService:ToastService
+    ) {
 
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -33,8 +36,8 @@ export class CustomerComponent implements OnInit {
   getCustomers(){
     this.homeServices.getCustomers().subscribe({
       next: resp => {
+        
         this.customers = resp
-
       },
       error: err => {
         console.log(err);
@@ -60,12 +63,11 @@ export class CustomerComponent implements OnInit {
   //  this.initializeForm(customer);
     this.modalService.open(content);
   }
-  saveUpdate(){
-    console.log(this.customerForm.value);
-    console.log("------------");
-    
+  saveUpdate(){ 
+
     this.homeServices.updateUser(this.customerForm.value).subscribe({
       next : resp=>{
+        this.showSuccess("customer updated successfully")
         this.getCustomers()
       },
       error : err=>{
@@ -75,14 +77,39 @@ export class CustomerComponent implements OnInit {
     })
   }
   deleteCustomer(id:number){
-    console.log(id);
+    
     this.homeServices.deleteCustomer(id).subscribe({
       next : resp=>{
+        this.showDanger("customer deleted successfully")
         console.log(resp);
-
         this.getCustomers()
-
       }
     })
   }
+
+
+
+
+
+
+
+
+
+  // Start toasts methods
+  showStandard(message:string) {
+		this.toastService.show(message);
+	}
+
+	showSuccess(message:string) {
+		this.toastService.show(message, { classname: 'bg-success text-light', delay: 10000 });
+	}
+
+	showDanger(message: string) {
+		this.toastService.show(message, { classname: 'bg-gradient-primary text-light', delay: 15000 });
+	}
+
+	ngOnDestroy(): void {
+		this.toastService.clear();
+	}
+  //End toasts methods
 }

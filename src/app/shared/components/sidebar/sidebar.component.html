@@ -13,7 +13,7 @@
   <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link text-white" *ngIf="color==1" (click)="switch(1)" [ngClass]="'active' + ' ' + colorSwitch"
+        <a class="nav-link text-white" *ngIf="color==1" (click)="switch(1)" [ngClass]="'active ' + ' ' + colorSwitch"
           [routerLink]="'/home'">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="material-icons opacity-10">dashboard</i>
@@ -92,9 +92,28 @@
 
     </ul>
   </div>
-  <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+  <div class="sidenav-footer position-absolute w-100 bottom-0 " >
     <div class="mx-3">
-      <a class="btn bg-gradient-primary mt-4 w-100" type="button">Go to Store</a>
+      <a class="btn bg-gradient-primary mt-4 w-100" type="button" href="http://localhost:4201">Go to Store</a>
     </div>
   </div>
+<!-- 
+  <button class="btn btn-success" (click)="showSuccess()" ngbTooltip="Will disappear in 10s">Success toast</button>
+  <app-toasts aria-live="polite" aria-atomic="true"></app-toasts> -->
+
+<!-- 
+  <button class="btn btn-success" (click)="showSuccess()" ngbTooltip="Will disappear in 10s">Success toast</button>
+  <ngb-toast
+			*ngFor="let toast of toastService.toasts"
+			[class]="toast.classname"
+			[autohide]="true"
+			[delay]="toast.delay || 5000"
+			(hidden)="toastService.remove(toast)"
+		>
+			<ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
+				<ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
+			</ng-template>
+
+			<ng-template #text>{{ toast.textOrTpl }}</ng-template>
+		</ngb-toast> -->
 </aside>

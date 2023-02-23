@@ -33,7 +33,7 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7">
                                         Confirmed</th>
-                                        <th
+                                    <th
                                         class="text-center text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7">
                                         Payement</th>
                                     <th class="text-uppercase  opacity-7">
@@ -41,7 +41,8 @@
                                 </tr>
                             </thead>
                             <tbody *ngIf="orders">
-                                <tr *ngFor="let order of orders| slice: (page-1) * pageSize : page * pageSize;let i = index">
+                                <tr
+                                    *ngFor="let order of orders| slice: (page-1) * pageSize : page * pageSize;let i = index">
                                     <td>
                                         <div class="d-flex px-2 py-1 ">
                                             <div class="d-flex flex-column justify-content-center">
@@ -105,11 +106,9 @@
 </div>
 
 
-<div class="col col-12 mx-auto d-flex justify-content-center" >
-    <ngb-pagination
-  [(page)]="page"
-  [pageSize]="pageSize"
-  [collectionSize]="orders.length"></ngb-pagination>
+<div class="col col-12 mx-auto d-flex justify-content-center">
+    <ngb-pagination *ngIf="orders" [(page)]="page" [pageSize]="pageSize"
+        [collectionSize]="orders.length"></ngb-pagination>
 
 </div>
 
@@ -166,10 +165,10 @@
                 </div>
             </div>
             <div class="m-3 row form-check form-switch">
-                <input class="form-check-input form-control"  formControlName="paid" type="checkbox" role="switch"
+                <input class="form-check-input form-control" formControlName="paid" type="checkbox" role="switch"
                     id="flexSwitchCheckDefault">
                 <label class="form-check-label " for="flexSwitchCheckDefault">check confirmation </label>
-                <input class="form-check-input form-control"  formControlName="confirmed" type="checkbox" role="switch"
+                <input class="form-check-input form-control" formControlName="confirmed" type="checkbox" role="switch"
                     id="flexSwitchCheckDefault">
                 <label class="form-check-label" for="flexSwitchCheckDefault">check payment </label>
             </div>
@@ -180,3 +179,6 @@
     </div>
 </ng-template>
 <!-- End orders modal  -->
+
+<!-- Toaster -->
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

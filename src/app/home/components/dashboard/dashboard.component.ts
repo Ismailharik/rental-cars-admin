@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.homeService.getStockInfo().subscribe({
       next: resp => {
-        console.log(resp);
+        // console.log(resp);
         this.stockInfo = resp
         
         this.stockInfo.stockFeedbacks.forEach(element => {
@@ -95,9 +95,9 @@ export class DashboardComponent implements OnInit {
           this.months.push(element.date)
           this.pieChartData.push({name:element.date,y:element.totalPrice})
         });
-    console.log(this.pieChartData);
-    console.log(this.sellPerMonth);
-    console.log(this.months);    
+    // console.log(this.pieChartData);
+    // console.log(this.sellPerMonth);
+    // console.log(this.months);    
 
       },
       error: err => {

@@ -5,6 +5,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CustomizeConfigComponent } from './components/customize-config/customize-config.component';
 import { RouterModule } from '@angular/router';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsComponent } from './components/toasts/toasts.component';
 
 
 
@@ -14,16 +16,21 @@ import { RouterModule } from '@angular/router';
     NavbarComponent,
     SidebarComponent,
     CustomizeConfigComponent,
+    ToastsComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgbToastModule,
+
   ],
   exports:[
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    CustomizeConfigComponent
+    CustomizeConfigComponent,
+    ToastsComponent
+
   ]
 })
 export class SharedModule { }

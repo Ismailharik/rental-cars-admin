@@ -2,6 +2,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from 'src/app/shared/components/toasts/toast-service';
 import { Category } from '../../models/category.model';
 import { Vehicle } from '../../models/vehilce.model';
 import { VehiclesService } from '../../services/vehicles.service';
@@ -29,7 +30,9 @@ export class VehilcesComponent implements OnInit {
     private vehiclesService: VehiclesService,
     config: NgbModalConfig,
     private modalService: NgbModal,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    public toastService: ToastService
+    ) {
 
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -107,6 +110,8 @@ export class VehilcesComponent implements OnInit {
     this.vehiclesService.addImage(this.selectedImageId, this.selectedImage).subscribe({
       next: resp => {
         if (resp.type == HttpEventType.UploadProgress) {
+          this.showSuccess("image added successfully")
+
           this.getAllVehicles();// refresh page
           console.log("success");
 
@@ -129,6 +134,7 @@ export class VehilcesComponent implements OnInit {
     this.vehiclesService.updateVehicle(this.vehicleForm.value).subscribe({
       next: resp => {
         // this.vehicles[this.indexOfUpdatedVehicle] = resp // to dont make a backend call 
+        this.showSuccess("vehicle updated successfully")
         this.getAllVehicles()
       }
     })
@@ -138,7 +144,7 @@ export class VehilcesComponent implements OnInit {
   deleteVehicle(id: number) {
     this.vehiclesService.deleteVehicle(id).subscribe({
       next: resp => {
-        alert("vehicle deleted successfully")
+        this.showDanger("vehicle deleted successfully")
         this.getAllVehicles()
       },
       error: err => {
@@ -152,18 +158,42 @@ export class VehilcesComponent implements OnInit {
     const vehicle: Vehicle = this.vehicleForm.value;
     console.log(vehicle);
     
-    // this.vehiclesService.addVehicle(vehicle, this.categoryId).subscribe({
-    //   next: resp => {
-    //     alert("Vehicle Added Successfully ")
-    //   },
-    //   error: err => {
-    //     console.log(err);
+    this.vehiclesService.addVehicle(vehicle, this.categoryId).subscribe({
+      next: resp => {
+        this.showSuccess("vehicle added successfully")
+        this.getAllVehicles()
+      },
+      error: err => {
+        console.log(err);
 
-    //   }
-    // })
-
-
-    //  this.vehiclesService.addVehicle(this.vehicleForm.value,).
-
+      }
+    })
   }
+
+
+
+
+
+  
+
+
+
+  // Start toasts methods
+  showStandard(message: string) {
+    this.toastService.show(message);
+  }
+
+  showSuccess(message: string) {
+    this.toastService.show(message, { classname: 'bg-success text-light', delay: 10000 });
+  }
+
+  showDanger(message: string) {
+    this.toastService.show(message, { classname: 'bg-gradient-primary text-light', delay: 15000 });
+  }
+
+  ngOnDestroy(): void {
+    this.toastService.clear();
+  }
+  //End toasts method
 }
+
