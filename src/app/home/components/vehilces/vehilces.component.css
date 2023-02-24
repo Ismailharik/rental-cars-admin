@@ -3,7 +3,7 @@ a{
     text-decoration: none;
 }
 
-.text-secondary {
+/* .text-secondary {
     --bs-text-opacity: auto;
     color: rgba(var(--bs-secondary-rgb),var(--bs-text-opacity))!important;
-}
+} */
