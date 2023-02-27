@@ -1,4 +1,4 @@
-<div class="container-fluid py-4" *ngIf="stockInfo">
+<div class="container-fluid py-4" *ngIf="stockInfo; else loader">
     <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
@@ -560,3 +560,12 @@
         </div>
     </div>
 </div>
+
+<!-- Loader -->
+<ng-template #loader >
+    <button class="btn btn-primary bg-gradient-primary" type="button" disabled
+        style="margin-left: calc( 50% - 52px / 2)">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+    </button>
+</ng-template>

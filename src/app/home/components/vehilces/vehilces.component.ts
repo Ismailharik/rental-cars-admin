@@ -23,7 +23,7 @@ export class VehilcesComponent implements OnInit {
 
   //pagination variables
   page:number = 1
-  pageSize:number = 5
+  pageSize:number = 4
 
   categoryId: number = 0 // used in add new Vehicle Model
   constructor(

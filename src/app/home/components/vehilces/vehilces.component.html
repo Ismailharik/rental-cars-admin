@@ -8,7 +8,8 @@
                         <div class="d-flex font-weight-bolder mx-2">
                             <h5 class="text-white text-capitalize ps-3">Vehicles Table</h5>
                             <div ngbDropdown class="" *ngIf="categories">
-                                <button type="button" class="btn mt-n1" id="dropdown1" ngbDropdownToggle>Select
+                                <button type="button" class="btn mt-n1" id="dropdown1" style="color:white"
+                                    ngbDropdownToggle>Select
                                     Category</button>
                                 <div ngbDropdownMenu aria-labelledby="dropdown1">
                                     <!-- items as buttons -->
@@ -18,7 +19,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn bg-gradient-dark mb-0 mx-2 " (click)="open(addVehicleModel)">
+                        <a class="btn bg-gradient-dark mx-2 " (click)="open(addVehicleModel)">
                             <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Vehicle
                         </a>
                     </div>
@@ -27,7 +28,7 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
+                        <table class="table align-items-center mb-0" *ngIf="vehicles; else loader">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
@@ -51,7 +52,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody *ngIf="vehicles">
+                            <tbody>
                                 <tr
                                     *ngFor="let vehicle of vehicles| slice: (page-1) * pageSize : page * pageSize;let i = index">
 
@@ -80,7 +81,6 @@
                                         <p class="text-xs font-weight-bold mb-0">{{vehicle.dailyPrice|currency}}
                                         </p>
                                     </td>
-
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{vehicle.dateFirstCirculation|date}}
                                         </p>
@@ -97,7 +97,6 @@
                                             <span *ngIf="!vehicle.available">unavailable</span>
                                         </span>
                                     </td>
-
                                     <td class="align-middle ">
                                         <a class="btn btn-link text-dark px-3 mb-0"
                                             (click)="open(updateVehicleModel,vehicle,i)">
@@ -331,3 +330,12 @@
 
 <!-- Toaster -->
 <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+
+<!-- Loader -->
+<ng-template #loader >
+    <button class="btn btn-primary bg-gradient-primary" type="button" disabled
+        style="margin-left: calc( 50% - 52px / 2)">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+    </button>
+</ng-template>

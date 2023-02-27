@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
+                        <table class="table align-items-center mb-0" *ngIf="customers; else loader">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
@@ -29,7 +29,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody >
                                 <tr *ngFor="let customer of customers| slice: (page-1) * pageSize : page * pageSize">
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -150,3 +150,13 @@
 
 <!-- Toaster -->
 <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+
+
+<!-- Loader -->
+<ng-template #loader >
+    <button class="btn btn-primary bg-gradient-primary" type="button" disabled
+        style="margin-left: calc( 50% - 52px / 2)">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+    </button>
+</ng-template>

@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
+                        <table class="table align-items-center mb-0" *ngIf="orders; else loader">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
@@ -168,8 +168,8 @@
                 <input class="form-check-input form-control" formControlName="confirmed" type="checkbox" role="switch"
                     id="flexSwitchCheckDefault">
                 <label class="form-check-label " for="flexSwitchCheckDefault">check confirmation </label>
-                
-                
+
+
                 <input class="form-check-input form-control" formControlName="paid" type="checkbox" role="switch"
                     id="flexSwitchCheckDefault">
                 <label class="form-check-label" for="flexSwitchCheckDefault">check payment </label>
@@ -184,3 +184,16 @@
 
 <!-- Toaster -->
 <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+
+
+<!-- Loader -->
+
+<ng-template #loader >
+
+    <button class="btn btn-primary bg-gradient-primary" type="button" disabled
+        style="margin-left: calc( 50% - 52px / 2)">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+    </button>
+
+</ng-template>

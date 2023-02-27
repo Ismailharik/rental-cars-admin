@@ -9,7 +9,7 @@ import { Options } from 'highcharts';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  
+
 })
 export class DashboardComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   Highcharts = Highcharts;
   months: any[] = []
   sellPerMonth: number[] = []
-  pieChartData:[{}]=[{}]
+  pieChartData: [{}] = [{}]
 
 
   lineChartOptions: Options = {
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
       data: this.sellPerMonth
     }]
   };
-  pieChartOptions:Options = {
+  pieChartOptions: Options = {
     chart: {
       type: 'pie'
     },
@@ -48,13 +48,13 @@ export class DashboardComponent implements OnInit {
       text: 'Pie Chart Example'
     },
     series: [{
-      type:'pie',
+      type: 'pie',
       name: 'Data',
       data: this.pieChartData
     }]
   };
-  barChart:Options = {
-  
+  barChart: Options = {
+
     title: {
       text: 'Sell per year'
     },
@@ -68,19 +68,14 @@ export class DashboardComponent implements OnInit {
       }
     },
     series: [{
-      type:'bar',
+      type: 'bar',
       name: 'Sell per year',
       data: this.sellPerMonth
     }]
   };
 
 
-
-
-
-
-
-  constructor(private homeService:HomeService) {
+  constructor(private homeService: HomeService) {
     HC_exporting(Highcharts);
   }
 
@@ -89,20 +84,16 @@ export class DashboardComponent implements OnInit {
       next: resp => {
         // console.log(resp);
         this.stockInfo = resp
-        
+
         this.stockInfo.stockFeedbacks.forEach(element => {
           this.sellPerMonth.push(element.totalPrice)
           this.months.push(element.date)
-          this.pieChartData.push({name:element.date,y:element.totalPrice})
+          this.pieChartData.push({ name: element.date, y: element.totalPrice })
         });
-    // console.log(this.pieChartData);
-    // console.log(this.sellPerMonth);
-    // console.log(this.months);    
-
       },
       error: err => {
         console.log(err);
-        
+
       }
       , complete() {
         console.log('Finished sequence');
