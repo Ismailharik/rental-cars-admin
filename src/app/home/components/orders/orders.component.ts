@@ -17,7 +17,7 @@ export class OrdersComponent implements OnInit {
 
   // pagination variables
   page = 1
-  pageSize = 5
+  pageSize = 6
   constructor(
     private ordersService: OrdersService,
     config: NgbModalConfig,
