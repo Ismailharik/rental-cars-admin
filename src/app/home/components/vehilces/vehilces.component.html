@@ -131,7 +131,7 @@
 
     <div class="modal-header">
         <h5 class="modal-title" id="modal-basic-title"> <span>Update Vehicle</span></h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        <a (click)="d('Cross click')"><i class="fa fa-window-close" aria-hidden="true"></i></a>
     </div>
     <div class="model-body">
         <form [formGroup]="vehicleForm">
@@ -149,13 +149,13 @@
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">description</label>
+                <label class="col-sm-4 col-form-label">Description</label>
                 <div class="col">
                     <input class="form-control" formControlName="description">
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">dailyPrice</label>
+                <label class="col-sm-4 col-form-label">Daily Price</label>
                 <div class="col">
                     <input class="form-control" formControlName="dailyPrice">
 
@@ -170,34 +170,34 @@
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">nbrOfKm</label>
+                <label class="col-sm-4 col-form-label">Number Of Km</label>
                 <div class="col">
                     <input class="form-control" formControlName="nbrOfKm">
 
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">franchise</label>
+                <label class="col-sm-4 col-form-label">Franchise</label>
                 <div class="col">
                     <input class="form-control" formControlName="franchise">
 
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">model</label>
+                <label class="col-sm-4 col-form-label">Model</label>
                 <div class="col">
                     <input class="form-control" formControlName="model">
 
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">office id</label>
+                <label class="col-sm-4 col-form-label">Office Id</label>
                 <div class="col">
                     <input class="form-control" formControlName="officeId">
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">category id</label>
+                <label class="col-sm-4 col-form-label">Category Id</label>
                 <div class="col">
                     <input class="form-control" formControlName="categoryId">
                 </div>
@@ -205,7 +205,7 @@
             <div class="m-3 row form-check form-switch">
                 <input class="form-check-input form-control" formControlName="available" type="checkbox" role="switch"
                     id="flexSwitchCheckDefault">
-                <label class="form-check-label " for="flexSwitchCheckDefault">check availability </label>
+                <label class="form-check-label " for="flexSwitchCheckDefault">Check Availability </label>
             </div>
         </form>
     </div>
@@ -220,7 +220,7 @@
 
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title"> <span>Update Vehicle</span></h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        <a (click)="d('Cross click')"><i class="fa fa-window-close" aria-hidden="true"></i></a>
     </div>
     <div class="model-body">
         <form [formGroup]="vehicleForm">
@@ -232,19 +232,19 @@
 
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">title</label>
+                <label class="col-sm-4 col-form-label">Title</label>
                 <div class="col">
                     <input class="form-control" formControlName="title">
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">description</label>
+                <label class="col-sm-4 col-form-label">Description</label>
                 <div class="col">
                     <input class="form-control" formControlName="description">
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">dailyPrice</label>
+                <label class="col-sm-4 col-form-label">Daily Price</label>
                 <div class="col">
                     <input class="form-control" formControlName="dailyPrice">
 
@@ -259,34 +259,34 @@
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">nbrOfKm</label>
+                <label class="col-sm-4 col-form-label">Number Of Km</label>
                 <div class="col">
                     <input class="form-control" formControlName="nbrOfKm">
 
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">franchise</label>
+                <label class="col-sm-4 col-form-label">Franchise</label>
                 <div class="col">
                     <input class="form-control" formControlName="franchise">
 
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">model</label>
+                <label class="col-sm-4 col-form-label">Model</label>
                 <div class="col">
                     <input class="form-control" formControlName="model">
 
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">office id</label>
+                <label class="col-sm-4 col-form-label">Office Id</label>
                 <div class="col">
                     <input class="form-control" formControlName="officeId">
                 </div>
             </div>
             <div class="m-3 row d-flex">
-                <label class="col-sm-4 col-form-label">category id</label>
+                <label class="col-sm-4 col-form-label">Category Id</label>
                 <div class="col">
                     <input class="form-control" [(ngModel)]="categoryId" [ngModelOptions]="{standalone: true}">
                 </div>
@@ -294,7 +294,7 @@
             <div class="m-3 form-check form-switch">
                 <input class="form-check-input form-control" formControlName="available" type="checkbox" role="switch"
                     id="flexSwitchCheckDefault">
-                <label class="form-check-label " for="flexSwitchCheckDefault">check availability </label>
+                <label class="form-check-label " for="flexSwitchCheckDefault">Check Availability </label>
             </div>
         </form>
     </div>
@@ -307,11 +307,10 @@
 
 <!-- Start Update Vehicle Model -->
 <ng-template #imageModal let-c="close" let-d="dismiss">
+
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title"> <span>Add Image</span></h4>
-    </div>
-    <div class="modal-header">
-        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        <h5 class="modal-title" id="modal-basic-title"> <span>Add  Image</span></h5>
+        <a (click)="d('Cross click')"><i class="fa fa-window-close" aria-hidden="true"></i></a>
     </div>
     <div class="model-body">
         <div class="mb-3">
